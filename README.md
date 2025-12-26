@@ -43,6 +43,13 @@ Limitations:
   
      No natural language processing
 
+Note: 
+
+      This project is a command-line based application.
+      To test the chatbot, the repository must be cloned or downloaded
+      and executed locally using Python.
+     
+
 Author: 
 
       Madhumitha M
