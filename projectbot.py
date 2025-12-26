@@ -18,7 +18,7 @@ def save_tasks(tasks):
 
 def parse_date(d):
     try:
-        return datetime.strptime(d, "%Y-%m-%d").date()
+        return datetime.strptime(d, "%d-%m-%Y").date()
     except ValueError:
         return None
 
@@ -56,7 +56,7 @@ def add_task(tasks):
         print("Task name cannot be empty.")
         return
 
-    due_str = input("Due date (YYYY-MM-DD): ").strip()
+    due_str = input("Due date (DD-MM-YYYY): ").strip()
     due = parse_date(due_str)
     if not due:
         print("Invalid date format.")
@@ -127,6 +127,7 @@ def summary(tasks):
     pending = total - completed
     overdue = 0
     tdy = today()
+
     for t in tasks:
         due = parse_date(t["due"])
         if t["status"] != "completed" and due and due < tdy:
@@ -171,3 +172,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
