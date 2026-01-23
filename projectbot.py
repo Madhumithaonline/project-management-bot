@@ -1,5 +1,4 @@
 import json
-import os
 from datetime import datetime, date
 
 DATA_FILE = "tasks.json"
@@ -7,10 +6,11 @@ DATA_FILE = "tasks.json"
 # ---------- Utility Functions ----------
 
 def load_tasks():
-    if not os.path.exists(DATA_FILE):
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
         return []
-    with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
 
 def save_tasks(tasks):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
@@ -57,8 +57,7 @@ def add_task(tasks):
         return
 
     due_str = input("Due date (DD-MM-YYYY): ").strip()
-    due = parse_date(due_str)
-    if not due:
+    if not parse_date(due_str):
         print("Invalid date format.")
         return
 
